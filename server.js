@@ -1,15 +1,10 @@
-/**
- * Created by TooNies1810 on 5/31/16.
- */
 var http = require("http");
-var url = require("url");
-var formidable = require("formidable");
 
-function start(route, handler) {
-    console.log("server is started!!");
+function start(router, handler) {
+    console.log("server is listening on 8888");
 
     http.createServer(function (req, res) {
-        route.route(handler, req.url, res, req);
+        router.route(handler, req.url, res, req);
     }).listen(8888);
 }
 
