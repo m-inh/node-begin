@@ -1,0 +1,42 @@
+<html>
+	<head></head>
+	<body>
+		<h3 id="title">title will be here...</h3>
+		<p id="content">content will be here...</p>
+		<img id="img" src='./static/cat.jpg'></img>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+		<script>
+			(($) => {
+				function run() {
+					const s = window.location.search
+					const isDog = s && s.indexOf('dog') !== -1
+					const animal = isDog ? 'cho' : 'meo'
+
+					console.log(animal)
+
+					$.ajax({
+						url: `${animal}.json`,
+						method: 'GET',
+						dataType: 'json',
+						success: function(response) {
+							const {title, content, img} = Object.assign({}, response)	
+
+							$('#title').text(title)
+							$('#content').text(content)
+							$('#img').attr('src', img)
+						},
+					})
+				}
+				
+				$(document).ready(() => {
+					console.log('ready')
+
+					run()
+				})
+			
+			})(jQuery)
+
+		</script>
+	</body>
+</html>
